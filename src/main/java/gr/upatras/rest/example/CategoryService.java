@@ -57,17 +57,14 @@ public class CategoryService implements ICategoryService {
 	public Category editCategory(Category catToAdd) {
 		Category editCat = findById(catToAdd.getId());
 		editCat.getProducts().clear();
-		if (editCat != null) {
-			editCat.setName(catToAdd.getName());
-			for (Product p : catToAdd.getProducts()) {
-				Product productToAdd = productService.findById(p.getId());
-				if (productToAdd != null) {
-					editCat.getProducts().add(productToAdd);
-				}
+		editCat.setName(catToAdd.getName());
+		for (Product p : catToAdd.getProducts()) {
+			Product productToAdd = productService.findById(p.getId());
+			if (productToAdd != null) {
+				editCat.getProducts().add(productToAdd);
 			}
-			return editCat;
 		}
-		return null;
+		return editCat;
 	}
 
 	@Override
